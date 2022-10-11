@@ -41,6 +41,7 @@ export const dictionarySlice = createSlice({
       .addCase(searchAsync.fulfilled, (state, action) => {
         state.status = 'idle';
         state.data = action.payload;
+        state.loading = false;
       })
       .addCase(searchAsync.rejected, (state) => {
         state.status = 'failed';

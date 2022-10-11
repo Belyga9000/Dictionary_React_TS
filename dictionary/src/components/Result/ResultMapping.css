@@ -1,0 +1,11 @@
+.AudioPlayer {
+    max-width: 300px;
+}
+.Accordion__Container {
+    max-width: 1200px;
+    margin: 50px auto 0;
+}
+.Typography__Title {
+    text-transform: capitalize;
+    text-align: center;
+}

@@ -4,7 +4,7 @@ export interface DictionaryResponseData {
   phonetics: Phonetics[];
   meanings: Meanings[];
   license: License;
-  sourseUrls: Array;
+  sourceUrls: string[];
 }
 
 export interface Phonetics {
@@ -22,7 +22,7 @@ export interface Meanings {
 }
 
 export interface Definitions {
-  definitions: string;
+  definition: string;
   synonyms: string[];
   antonyms: string[];
   example: sting;

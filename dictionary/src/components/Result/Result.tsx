@@ -1,60 +1,31 @@
-import {
-  Accordion,
-  AccordionSummary,
-  Grid,
-  Typography,
-} from '@mui/material';
-import AccordionDetails from '@mui/material/AccordionDetails';
 import { useEffect } from 'react';
 import { useParams } from 'react-router';
 import { useAppDispatch, useAppSelector } from '../../app/hooks';
-import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
+import CircularProgress from '@mui/material/CircularProgress';
+import './Result.css';
 
 import {
   searchAsync,
   selectDictionaryData,
+  selectDictionaryLoading,
 } from '../../features/dictionary/dictionarySlice';
+import { ResultMapping } from './ResultMapping';
+import { Box } from '@mui/material';
 
   interface Params {
     word?: string;
   }
 
-export const Result = (): JSX.Element => {
+export function Result(): JSX.Element {
   const data = useAppSelector(selectDictionaryData);
+  const loading = useAppSelector(selectDictionaryLoading);
   const params: Params = useParams();
   const word = params.word || '';
   const dispatch = useAppDispatch();
 
   useEffect(() => {
-    const timer = setTimeout(() => {
-      dispatch(searchAsync(word));
-    }, 1000);
-
-    return () => {
-      clearTimeout(timer);
-    };
+    dispatch(searchAsync(word));
   }, [word]);
 
-  return (
-    <Grid>
-      {data?.map((e, index) => (
-        <Accordion key={index}>
-          <AccordionSummary
-            expandIcon={<ExpandMoreIcon />}
-            aria-controls={`{${index}-content`}
-            id={`{${index}-header`}
-          >
-            <Typography>Accordion 1</Typography>
-          </AccordionSummary>
-          <AccordionDetails>
-            <Typography>
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-                Suspendisse malesuada lacus ex, sit amet blandit leo lobortis
-                eget.
-            </Typography>
-          </AccordionDetails>
-        </Accordion>
-      ))}
-    </Grid>
-  );
-};
+  return (loading ? <Box className='CircularProgress__Container'><CircularProgress  /></Box> : <ResultMapping data={data} />);
+}

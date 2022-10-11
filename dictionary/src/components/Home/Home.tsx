@@ -2,15 +2,17 @@ import { useEffect, useState } from 'react';
 import TextField from '@mui/material/TextField';
 import { Grid } from '@mui/material';
 import { useNavigate } from 'react-router';
+import './Home.css';
 
 export function Home(): JSX.Element {
   const [wordInput, setWordInput] = useState('');
   const navigate = useNavigate();
+  const timerDelay = 1000;
 
   useEffect(() => {
     const timer = setTimeout(() => {
       navigate(wordInput);
-    }, 1000);
+    }, timerDelay);
 
     return () => {
       clearTimeout(timer);
@@ -35,7 +37,6 @@ export function Home(): JSX.Element {
         onKeyPress={(e) => {
           if (e.key === 'Enter') navigate(wordInput);
         }}
-        sx={{ width: '350px', marginTop: '100px' }}
       />
     </Grid>
   );

@@ -1,0 +1,9 @@
+.NotFound__Container {
+    background-color: white;
+    max-width: 300px;
+    margin: 50px auto 0;
+    text-align: center;
+    font-size: 1.25rem;
+    border: 1px solid black;
+    border-radius: 4px;
+}
