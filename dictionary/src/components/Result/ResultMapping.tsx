@@ -18,7 +18,6 @@ interface Props {
     data: DictionaryResponseData[] | null
 }
 
-
 export function ResultMapping(props: Props): JSX.Element {
   return (
     <Grid className='Accordion__Container'> {props.data ? props.data?.map((e, index) => (
@@ -28,37 +27,38 @@ export function ResultMapping(props: Props): JSX.Element {
           aria-controls={`${index}-content`}
           id={`${index}-header`}
         >
-          <Typography className='Typography__Title'>word: {e.word} phonetic: {e.phonetic} </Typography>
+          <Typography>{index+1}) Word: {e.word}. </Typography>
         </AccordionSummary>
         <AccordionDetails>
-          <Typography className='Typography__Title'>phonetics</Typography>
-          {e.phonetics?.map((phon) => (
-            <Card>
+          {e.phonetic ? (<Typography>Phonetic:{e.phonetic} </Typography>) : <></>}
+          {e.phonetics.length ? (<Typography className='Typography__Title'>phonetics</Typography>) : <></>}
+          {e.phonetics?.map((phon, index) => (
+            <Card key={phon.text + index}>
               <CardContent>
-                <Typography>phonetic-Text: {phon.text}</Typography>
+                <Typography>Phonetic-Text: {phon.text}</Typography>
                 {phon.audio ? <ReactAudioPlayer src={`${phon.audio}`} controls className='AudioPlayer' /> : <></> }
-                <Typography>source-URL: <Link href={`${phon.sourceUrl}`} underline="none">
+                {phon.sourceUrl ? (<Typography>Source-URL: <Link href={`${phon.sourceUrl}`} underline="none">
                   {phon.sourceUrl}
-                </Link></Typography>
-                <Typography>license</Typography>
-                <Typography>license-Name: {phon.license.name}</Typography>
-                <Typography>license-URL: <Link href={`${phon.license.url}`} underline="none">
-                  {phon.license.url}
-                </Link></Typography>
+                </Link></Typography>) : <></>}
+                {phon.license ? (<>
+                  <Typography>License-Name: {phon.license.name}</Typography>
+                  <Typography>License-URL: <Link href={`${phon.license.url}`} underline="none">
+                    {phon.license.url}
+                  </Link></Typography></>) : <></>}
               </CardContent>
             </Card>))}
           <Typography className='Typography__Title'>meanings</Typography>
-          {e.meanings?.map((el) => (
-            <Card>
+          {e.meanings?.map((el, index) => (
+            <Card key={el.partOfSpeech + index}>
               <CardContent>
-                <Typography>part of speech: {el.partOfSpeech}</Typography>
+                <Typography>Part of speech: {el.partOfSpeech}</Typography>
                 {el.definitions?.map((defin) => (
-                  <Card>
+                  <Card key={defin.definition}>
                     <CardContent>
-                      <Typography>definition: {defin.definition}</Typography>
-                      {defin.synonyms.length ?  <Typography>synonyms: {defin.synonyms?.map(
+                      <Typography>Definition: {defin.definition}</Typography>
+                      {defin.synonyms.length ?  <Typography>Synonyms: {defin.synonyms?.map(
                         (syn, index) => `${index + 1}) ` + `${syn}` + ', ')}</Typography> : <></>}
-                      {defin.antonyms.length ?  <Typography>antonyms: {defin.antonyms?.map(
+                      {defin.antonyms.length ?  <Typography>Antonyms: {defin.antonyms?.map(
                         (anto, index) => `${index + 1}) ` + `${anto}` + ', ')}</Typography> : <></>}
                     </CardContent>
                   </Card>
@@ -68,16 +68,16 @@ export function ResultMapping(props: Props): JSX.Element {
           <Typography className='Typography__Title'>license</Typography>
           <Card>
             <CardContent>
-              <Typography>license-Name: {e.license.name}</Typography>
-              <Typography>license-Url: <Link href={`${e.license.url}`} underline="none">
+              <Typography>License-Name: {e.license.name}</Typography>
+              <Typography>License-Url: <Link href={`${e.license.url}`} underline="none">
                 {e.license.url}
               </Link></Typography>
             </CardContent>
           </Card>
-          <Typography className='Typography__Title'>sourseUrls</Typography>
+          <Typography className='Typography__Title'>SourseUrls</Typography>
           <Card>
             <CardContent>
-              {e.sourceUrls?.map((url, index) => (<Typography>{index+1}) <Link href={`${url}`} underline="none">
+              {e.sourceUrls?.map((url, index) => (<Typography key={url}>{index+1}) <Link href={`${url}`} underline="none">
                 {url}
               </Link></Typography>))}
             </CardContent>
