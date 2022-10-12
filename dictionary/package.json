@@ -17,6 +17,7 @@
     "@types/react-dom": "^18.0.6",
     "@types/react-router-dom": "^5.3.3",
     "axios": "^1.1.2",
+    "axios-mock-adapter": "^1.21.2",
     "eslint-plugin-no-explicit-type-exports": "^0.12.1",
     "react": "^18.2.0",
     "react-audio-player": "^0.17.0",
@@ -59,6 +60,7 @@
     "eslint-plugin-n": "^15.3.0",
     "eslint-plugin-promise": "^6.0.1",
     "eslint-plugin-react": "^7.31.9",
+    "jest-mock-axios": "^4.7.0-beta",
     "typescript": "^4.8.4"
   }
 }

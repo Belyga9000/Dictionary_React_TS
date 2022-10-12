@@ -28,6 +28,7 @@ export function Home(): JSX.Element {
       justifyContent="center"
     >
       <TextField
+        className='Home__input'
         id="word-input"
         label="Search"
         autoComplete="off"

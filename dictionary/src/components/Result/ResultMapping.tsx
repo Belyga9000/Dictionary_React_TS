@@ -27,7 +27,7 @@ export function ResultMapping(props: Props): JSX.Element {
           aria-controls={`${index}-content`}
           id={`${index}-header`}
         >
-          <Typography>{index+1}) Word: {e.word}. </Typography>
+          <Typography>{index+1}) Word: {e.word}. Definition: {e.meanings[0].definitions[0].definition} </Typography>
         </AccordionSummary>
         <AccordionDetails>
           {e.phonetic ? (<Typography>Phonetic:{e.phonetic} </Typography>) : <></>}

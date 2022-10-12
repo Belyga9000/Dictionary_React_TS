@@ -1,8 +1,9 @@
-import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
-import { RootState } from '../../app/store';
 import axios from 'axios';
 import { DictionaryResponseData } from '../../types/interface.d';
+import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
+import { RootState } from '../../app/store';
 
+const API_URL = 'https://api.dictionaryapi.dev/api/v2/entries/en/';
 
 export interface DictionaryState {
   loading: boolean;
@@ -19,9 +20,8 @@ const initialState: DictionaryState = {
 export const searchAsync = createAsyncThunk(
   'word',
   async (word: string) => {
-    const response = await axios(
-      `https://api.dictionaryapi.dev/api/v2/entries/en/${word}`
-    );
+    const url = API_URL + word;
+    const response = await axios(url);
 
     return response.data;
   }
